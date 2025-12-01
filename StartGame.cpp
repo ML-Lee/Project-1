@@ -14,6 +14,7 @@ using namespace std;
 
 void startGame()
 {	
+    clearScreen();
     ///////////////CREATE A CHARACTER/////////////////
     char test;
     do { //Program loops if user does not confirm character
@@ -30,19 +31,52 @@ void startGame()
         cout << "1. Male" << endl
             << "2. Female" << endl;
 
-        cin >> myGender;
+        int charGender = validuserNum(); //Input gender type 
 
+        switch (charGender)
+        {
+        case 1: 
+            myGender = "Male";
+        case 2:
+            myGender = "Female";
+        default://defaults to male if errors occur
+            myGender = "Male";
+
+        }
 
         cout << "\n\nSelect your species: \n"
             << "--------------------\n\n";
 
         cout << "1. Human" << endl
-            << "2. Elf" << endl
-            << "3. Dwarf" << endl
-            << "4. Vampire" << endl
-            << "5. Werewolf" << endl;
+             << "2. Elf" << endl
+             << "3. Dwarf" << endl
+             << "4. Vampire" << endl
+             << "5. Werewolf" << endl << endl
+             << "(Enter number 1-5)\n" << endl;
 
-        cin >> mySpecies;
+        int selectSpecies = validSpecies(1,5);
+        
+        switch (selectSpecies)
+        {
+            case 1:
+                mySpecies = "Human";
+                break;
+            case 2:
+                mySpecies = "Elf";
+                break;
+            case 3:
+                mySpecies = "Dwarf";
+                break;
+            case 4:
+                mySpecies = "Vampire";
+                break;
+            case 5:
+                mySpecies = "Werewolf";
+                break;
+            default: //defaults to human if errors occur
+                mySpecies = "Human";
+                break;
+        }
 
         Player.setCharacter(myName, myGender, mySpecies);
 
@@ -51,21 +85,18 @@ void startGame()
             << Player.getGender() << ", "
             << Player.getSpecies() << endl;
 
-        cout << "\nConfirm your Character? (y/n) or \"q\" to quit.\n";
+        cout << "\nConfirm your Character? (y/n)\n";
 
         char confirmChar = validCharacter();
         
-        if (confirmChar == 'q')
-        {
-            cout << "\nExiting Game\n";
-            break;
-        }
-        else if (confirmChar == 'y')
+            
+        if (confirmChar == 'y')
         {
             test = 'y';
         }
-        else
+        else if (confirmChar == 'n')
         {
+            clearScreen();
             test = 'n';
             cin.clear();//discard the input
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
