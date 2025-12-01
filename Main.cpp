@@ -15,6 +15,7 @@ Allan Vang & Mail Lee Lee
 #include <iomanip>
 #include <string>
 #include <limits>
+#include <chrono>
 
 
 using namespace std;
@@ -24,6 +25,9 @@ using namespace std;
 
 int main()
 {
+    //Code that handles runtime
+    auto start = chrono::high_resolution_clock::now();
+
     char quitGame = 'n'; //quits game if quit = 'y';
     displayMenu();//Displays Game Menu
     
@@ -76,6 +80,11 @@ int main()
   
   
 
+    //Runtime code
+    auto end = chrono::high_resolution_clock::now();
+    chrono::duration<double, milli> ms = end - start;
+
+    cout << "\nExecution time: " << ms.count() << " Milliseconds\n";
 
     return 0;
 
